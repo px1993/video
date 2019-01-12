@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../public/css/weui.css"/>
+    <link rel="stylesheet" href="../public/css/weuix.css"/>
+    <link href="https://cdn.bootcss.com/dplayer/1.25.0/DPlayer.min.css" rel="stylesheet">
+</head>
+
+<body ontouchstart>
+<div id="app">
+    <div class="page-bd">
+        <div id="dplayer"></div>
+    </div>
+    <div class="weui-tab" id="t1" style="height:44px;">
+        <div class="weui-navbar">
+            <div class="weui-navbar__item">
+                介绍
+            </div>
+            <div class="weui-navbar__item">
+                精彩片段
+            </div>
+            <div class="weui-navbar__item">
+                联系
+            </div>
+            <div class="weui-navbar__item" @clock="">
+                关注+
+            </div>
+        </div>
+    </div>
+    <div class="page-hd">
+        <article class="weui_article">
+            <section>
+                <section>
+                    <span v-html="content"></span>
+                </section>
+            </section>
+        </article>
+    </div>
+
+    <div class="weui-footer">
+        <p class="weui-footer__links">
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+        </p>
+        <p class="weui-footer__text">Copyright © 2008-2016</p>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/dplayer/1.25.0/DPlayer.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg: 'hello world！',
+            content: '<p><!--StartFragment--></p><p>还记得2013年12月15日，玉兔号踏上月面之后，着陆器的地形地貌相机和月球车玉兔的全景相机的两器互拍么？</p><p class="f_center"><img alt="玉兔二号着陆器互拍 嫦娥四号在月背做这三件大事" src="" style="border-width: 0px; border-style: none; border-; vertical-align: middle; display: block; margin: 0px auto; max-width: 640px;" /></p><p>午休之后的玉兔二号于1月10日被唤醒。11日，时隔5年，我们再次看到了着陆器和月球车历史性的两器互拍！</p><p>据新华社报道，11日下午，嫦娥四号着陆器与玉兔二号巡视器工作正常，在“鹊桥”中继星支持下顺利完成互拍，地面接收图像清晰完好，中外科学载荷工作正常，探测数据有效下传，搭载科学实验项目顺利开展，达到工程既定目标，标志着嫦娥四号任务圆满成功。至此，中国探月工程取得“五战五捷”。</p><p class="f_center"><img src="http://cms-bucket.ws.126.net/2019/01/12/394abb732ec44e25a2f5d60056e502b3.jpg" alt="嫦娥四号着陆器与玉兔二号巡视器互拍（来源：央视）" style="border-width: 0px; border-style: none; border-; vertical-align: middle; display: block; margin: 0px auto; max-width: 640px;" />嫦娥四号着陆器与玉兔二号巡视器互拍（来源：央视）</p><p><strong>一、嫦娥四号着陆后的日程安排</strong></p><p>2019年1月3日上午10：26，嫦娥四号月球探测器顺利着陆在月球背面东经177.6°，南纬45.5°的冯·卡门撞击坑中，成为人类首颗成功软着陆月球背面的探测器。</p><p>1月3日22：22分，月球车“玉兔二号”顺利踏上月球背面！它将接替玉兔号月球车，成为“看星星最多的兔子”！</p><p class="f_center"><img src="http://cms-bucket.ws.126.net/2019/01/12/eee35acf0998402e94e4cb4b38cc0639.jpg" alt="不（左上）嫦娥四号降落相机的照片和LROC NAC影像的匹配，来源：LROC/ASU[1]（左下）冯·卡门撞击坑位置（右）嫦娥四号着陆区。来源：LROC WAC/NAC/haibaraemily上图右边这个大约3×5公里的区域，就是小兔子着陆后，在月背的主要活动范围。" '
+        },
+        methods:{
+
+        },
+    });
+    var dplayer = new DPlayer({
+        container: document.getElementById('dplayer'),
+        live: false,
+        danmaku: true,
+        mutex: true,
+        logo:'',
+        // apiBackend: {
+        //     read: function (endpoint, callback) {
+        //         console.log('Pretend to connect WebSocket');
+        //         callback();
+        //     },
+        //     send: function (endpoint, danmakuData, callback) {
+        //         console.log('Pretend to send danamku via WebSocket', danmakuData);
+        //         callback();
+        //     }
+        // },
+        volume:0.7,
+        video: {
+            quality: [{
+                name: '高清',
+                url: 'http://www.jinxcm.com/uploads/download/2018/08/20180806172826_29435.mp4',
+                type: 'hls'
+            }, {
+                name: '标清',
+                url: 'http://www.jinxcm.com/uploads/download/2018/07/20180706104735_81951.mp4',
+                type: 'normal'
+            }],
+            defaultQuality: 0,
+            thumbnails: '../public/images/video.jpg'
+        }
+    });
+    // const danmaku = {
+    //     text: 'Get a danamku via WebSocket',
+    //     color: '#fff',
+    //     type: 'right'
+    // };
+    // dplayer.danmaku.draw(danmaku);
+    dplayer.video.current.onplay = function(){
+        console.log("start play video");
+    }
+</script>
+</body>
+</html>
